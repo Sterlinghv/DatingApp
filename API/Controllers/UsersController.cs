@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] // will take the first part of the name of the controller, so the Users. /api/users
-public class UsersController : ControllerBase
+public class UsersController : BaseApiController
 {
     private readonly DataContext _context;
 
