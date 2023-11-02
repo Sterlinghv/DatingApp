@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using SQLitePCL;
 
 namespace API.Controllers;
-public class AccountsController : BaseApiController
+public class AccountController : BaseApiController
 {
     private readonly DataContext _context;
-    public AccountsController(DataContext context)
+    public AccountController(DataContext context)
     {
         _context = context;
     }
