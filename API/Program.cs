@@ -1,5 +1,9 @@
+using System.Text;
+using API;
 using API.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +16,28 @@ builder.Services.AddDbContext<DataContext>(opt =>
 });
 
 builder.Services.AddCors();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opts => 
+    {
+        opts.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true, // checks of token is signed by issuer.. its essential
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding
+                .UTF8.GetBytes(builder.Configuration["TokenKey"])),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 var app = builder.Build();
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod()
+    .WithOrigins("https://localhost:4200"));
+
+// middleware
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
