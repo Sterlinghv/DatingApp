@@ -476,3 +476,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 API/appsettings.json
+
+# database
+
+# other
+NOTES.md
