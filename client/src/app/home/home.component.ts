@@ -29,4 +29,8 @@ export class HomeComponent {
       complete: () => console.log('Request has worked!')
     })
   }
+
+  cancelRegisterMode(event: boolean) {
+    this.registerMode = event;
+  }
 }
