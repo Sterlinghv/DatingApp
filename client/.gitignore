@@ -42,5 +42,5 @@ testem.log
 Thumbs.db
 
 # Database
-.db-shm
-.db-wal
+*db-shm
+*db-wal
