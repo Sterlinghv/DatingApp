@@ -18,8 +18,10 @@ public class AppUser
     public string Country { get; set; }
     public List<Photo> Photos { get; set; } = new(); // creates new empty list
 
+/*
     public int GetAge()
     {
         return DateOfBirth.CalculateAge();
     }
+*/
 }
