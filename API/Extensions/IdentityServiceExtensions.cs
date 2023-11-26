@@ -14,7 +14,7 @@ public static class IdentityServiceExtensions
             {
                 opts.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true, // checks of token is signed by issuer.. its essential
+                    ValidateIssuerSigningKey = true, // checks if token is signed by issuer.. its essential
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding
                         .UTF8.GetBytes(config["TokenKey"])),
                     ValidateIssuer = false,
