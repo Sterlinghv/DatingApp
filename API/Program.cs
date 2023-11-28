@@ -10,13 +10,23 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        policyBuilder => policyBuilder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 var app = builder.Build();
 
 // Configure HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod()
-    .WithOrigins("https://localhost:4200"));
+// Use the CORS policy
+app.UseCors("AllowAllOrigins");
 
 // middleware
 app.UseAuthentication();
